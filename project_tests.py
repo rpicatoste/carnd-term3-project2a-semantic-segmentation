@@ -15,16 +15,16 @@ def test_safe(func):
     def func_wrapper(*args):
         with tf.Graph().as_default():
             result = func(*args)
-        print('Tests Passed')
+        print('Tests Passed', func.__name__)
         return result
 
     return func_wrapper
 
 
 def _prevent_print(function, params):
-    sys.stdout = open(os.devnull, "w")
+    #sys.stdout = open(os.devnull, "w")
     function(**params)
-    sys.stdout = sys.__stdout__
+    #sys.stdout = sys.__stdout__
 
 
 def _assert_tensor_shape(tensor, shape, display_name):
